@@ -1,0 +1,48 @@
+{
+  "menu_web": {
+    "home": "Home",
+    "request_service": "Request service",
+    "want_be_provider": "I want to be provider",
+    "login": "Login"
+  },
+  "form_login": {
+    "login": "Inicio de sesión",
+    "email": "Email",
+    "password": "Contraseña",
+    "forget_password": "¿Olvido su contraseña?",
+    "no_count": "¿No tiene una cuenta?",
+    "create": "Cree una"
+  },
+  "registro": {
+    "title": "Profile Registration",
+    "first_name": "First Name(s)",
+    "last_name": "Last Name(s)",
+    "email": "Email",
+    "birth_date": "Date of Birth",
+    "phone": "Phone",
+    "password": "Password",
+    "password_repeat": "Repeat Password",
+    "type_user": "User Type",
+    "create_user": "Create User",
+    "client": "Client",
+    "provider": "Provider",
+    "terms_conditions": "Terms and Conditions",
+    "privacy_notification": "Privacy Notification",
+    "placeholder": {
+      "first_name": "Enter your first name(s)",
+      "last_name": "Enter your last name(s)",
+      "email": "Enter an email",
+      "birth_date": "Enter your date of birth",
+      "phone": "Enter your phone number",
+      "password": "Enter a password",
+      "password_repeat": "Enter your password again"
+    },
+    "message": {
+      "error_field": "This field is required",
+      "error_email": "Enter a valid email",
+      "error_password": "Password must contain at least: 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character, and be at least 8 characters long",
+      "error_same_password": "The entered passwords do not match",
+      "error_phone": "Enter a valid phone number"
+    }
+  }
+}

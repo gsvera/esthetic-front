@@ -1,0 +1,56 @@
+{
+  "menu_web": {
+    "home": "Inicio",
+    "request_service": "Solicita un servicio",
+    "want_be_provider": "Quiero ser proveedor",
+    "login": "Inicio de sesión"
+  },
+  "form_login": {
+    "login": "Inicio de sesión",
+    "email": "Email",
+    "password": "Contraseña",
+    "button_login": "Iniciar sesión",
+    "forget_password": "¿Olvido su contraseña?",
+    "no_count": "¿No tiene una cuenta?",
+    "create": "Cree una",
+    "error_login": "Hubo un error, por favor intentelo mas tarde",
+    "user_password_invalidate": "Usuario o contraseña incorrectos"
+  },
+  "registro": {
+    "title": "Registro de perfil",
+    "first_name": "Nombre(s)",
+    "last_name": "Apellido(s)",
+    "email": "Correo electronico",
+    "birth_date": "Fecha de nacimiento",
+    "phone": "Telefono",
+    "password": "Contraseña",
+    "password_repeat": "Repetir contraseña",
+    "type_user": "Tipo de usuario",
+    "create_user": "Crear usuario",
+    "client": "Cliente",
+    "provider": "proveedor",
+    "terms_conditions": "Terminos y condiciones",
+    "privacy_notification": "Aviso de privacidad",
+    "placeholder": {
+      "first_name": "Ingrese su nombre(s)",
+      "last_name": "Ingrese su apellido(s)",
+      "email": "Ingrese un correo electronico",
+      "birth_date": "Ingrese su fecha de nacimiento",
+      "phone": "Ingrese su telefono",
+      "password": "Ingrese una contraseña",
+      "password_repeat": "Ingrese nuevamente su contraseña"
+    },
+    "message": {
+      "error_field": "Campo obligatorio",
+      "error_email": "Ingrese un correo valido",
+      "error_password": "La contraseña debe tener por lo menos: 1 minuscula, 1 mayuscula, 1 numero, 1 caracter especial y minimo 8 caracteres",
+      "error_same_password": "El password ingresado no es el mismo",
+      "error_phone": "Ingrese un numero telefonico valido",
+      "error_same_user": "Ya existe un usuario con el mismo email o telefono",
+      "success_create_user": "Se creo su usuario con éxito"
+    }
+  },
+  "general_message": {
+    "error_sistem": "Hubo un error, por favor intentelo mas tarde"
+  }
+}

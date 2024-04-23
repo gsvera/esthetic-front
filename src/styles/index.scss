@@ -1,0 +1,111 @@
+
+:root {
+    --back-color-purple: #352D7E;
+    --back-color-purple-rgb: 53, 45, 126;
+    --back-color-pink: #B43A6B; 
+    --back-color-pink-rgb: 180, 58, 107;
+    --back-color-bone: #F7F7F7;
+    
+    --color-success: #00DA11;
+    --color-success-rgb: 0, 218, 17;
+
+
+    --text-color-menu: #B43A6B; 
+    --text-color-link: #352D7E;
+}
+
+.d-flex{
+    display: flex;
+}
+.center-x-y {
+    justify-content: center;
+    align-items: center;
+}
+.btn-login {
+    width: 100%;
+    box-shadow: 0 0 0 4px rgba(255,255,255,.1);
+    font-size: 16px;
+}
+.btn-lang {
+    width: 50px;
+}
+.btn-login, .btn-lang {
+    position: relative;
+    z-index: 1;
+    
+    text-align: center;
+    padding: 15px 25px;
+    text-transform: capitalize;
+    transition: background-position 4s ease;
+    background: linear-gradient(to right, var(--back-color-pink), var(--back-color-pink) ) ;
+    color: #fff;
+    display: inline-block;
+    border-radius: 0;
+    border: none;
+    
+    overflow: hidden;
+}
+.btn-login:hover::before, .btn-lang:hover::before {
+    width: 100%;
+    transition: all ease-in-out .5s;
+}
+.btn-login::before, .btn-lang::before {
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 100%;
+    top: 0;
+    content: '';
+    background: var(--back-color-purple);
+    color: white !important;
+    transition: all ease-in-out .5s;
+    z-index: -1;
+}
+label{
+    font-weight: 600;
+}
+.ant-form-item-row {
+    display: block;
+}
+.ant-form-item-label{
+    text-align: start !important;
+}
+
+.ant-radio-button-wrapper-checked {
+    border-color: var(--back-color-purple) !important;
+    span {
+        color: var(--text-color-link) !important;
+        font-weight: bold;
+    }
+}
+.form-input{
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-radius: 0 !important;
+    border-bottom: 1px solid var(--back-color-purple);    
+    font-size: 0.9em;
+    &:focus {
+        border:none !important;
+        border-color: var(--back-color-purple) !important;
+        outline: none !important;
+        border-radius: 5px !important;
+        // box-shadow: 0 0 4px 3px rgba(var(--back-color-purple-rgb), 0.3) !important;
+    }
+}
+.form-input-success {
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-radius: 0 !important;
+    border: 1px solid var(--color-success);    
+    font-size: 0.9em;
+}
+.check-success-green {
+    color: var(--color-success);
+    font-weight: bold;
+    font-size: 1em;
+}
+.ant-form-item-explain-error {
+    font-size: 0.9em;
+}

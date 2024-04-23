@@ -1,0 +1,21 @@
+.content-form-login{
+    border-radius: 10px;
+    .bg-logo-back{
+        background: var(--back-color-pink);
+        border-radius: 1rem 0 0 1rem;
+        justify-content: center;
+    }
+    .img-login{
+        height: 100px;
+        width: auto;
+    }
+    .body-content-login {
+        border: 1px solid var(--back-color-pink);
+        border-left: none;
+        border-radius: 0 10px 10px 0;
+    }
+    .font-link {
+        color: var(--text-color-link) !important;
+        text-decoration: none;
+    }
+}

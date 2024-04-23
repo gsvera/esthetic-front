@@ -1,0 +1,26 @@
+{
+  "singleQuote": true,
+  "trailingComma": "none",
+  "endOfLine": "auto",
+  "tabWidth": 2,
+  "semi": true,
+  "useTabs": false,
+  "bracketSpacing": true,
+  "printWidth": 120,
+  "importOrder": [
+    "^react",
+    "^config/(.*)$",
+    "^context/(.*)$",
+    "^modules/(.*)$",
+    "^features/(.*)$",
+    "^api/(.*)$",
+    "^utils",
+    "^hooks$",
+    "^hooks/(.*)$",
+    "^components/(.*)$",
+    "^moment$",
+    "^[./]"
+  ],
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": true
+}
