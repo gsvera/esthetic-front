@@ -1,5 +1,4 @@
 
-
 export const REACT_QUERY_KEYS = {
     catalog: {
         profile: {
@@ -8,5 +7,8 @@ export const REACT_QUERY_KEYS = {
         lada_phone: {
             getAll: (key) => `get-all-lada-profile-${key}`
         }
+    },
+    user: {
+        getDataByToken: (key) => `get-data-by-token-${key}`
     }
 }

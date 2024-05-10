@@ -1,8 +1,14 @@
 .menu-web{
     background: linear-gradient(to right, var(--back-color-purple), var(--back-color-pink));
-    position: fixed;
+    position: relative;
     width: 100%;
     z-index: 99;
+    &.scrolled {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
     .text-menu {
         color: white;
         cursor: pointer;

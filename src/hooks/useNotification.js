@@ -6,7 +6,7 @@ const { Text } = Typography;
 const defaultNotificationProps = {
     duration: 3,
     placement: 'topRight',
-    style: { borderRadius: '10px', width: '355px', zIndex: '999' },
+    style: { borderRadius: '10px', width: '255px', zIndex: '999' },
     closeIcon: <CloseOutlined width="10" height="10" />
 }
 

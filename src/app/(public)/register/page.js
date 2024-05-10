@@ -1,30 +1,32 @@
 'use client'
 
 import React, { useEffect, useMemo, useState } from 'react'
-import styles from "../page.module.css";
-import { useParams, useSearchParams } from 'next/navigation'
+import styles from "../../page.module.css";
+import { useParams, useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import { Form, Input, DatePicker, Row, Col, Flex, Radio, Select, Checkbox } from 'antd'
+import { Form, Input, DatePicker, Row, Col, Flex, Radio, Select, Checkbox } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import Button from '@/components/Button';
 import { REGEX_CATALOG } from '@/config/constans';
 import './index.scss'
 import { useQuery, useMutation } from 'react-query';
+import { useDispatch, useSelector } from 'react-redux';
+import { setToken } from '@/store-redux/slide/userSlide';
 import { REACT_QUERY_KEYS } from '@/config/react-query-keys';
 import { useNotification } from '@/hooks/useNotification';
 import apiCatalogLadaPhone from '@/api/services/apiCatalogLadaPhone';
 import apiCatalogProfile from '@/api/services/apiCatalogProfile';
 import apiUser from '@/api/services/apiUser';
 import i18next from 'i18next';
+import { useRouter } from 'next/navigation';
 
 const { useForm } = Form;
-
-const customLabel = (text) => {
-    return <div>{text}<span style={{color: 'red', fontSize: '1.1em'}}>*</span></div>
-}
 
 export default function Perona() {
     const { t } = useTranslation();
     const [ form ] = useForm();
+    const router = useRouter();
+    const dispatch = useDispatch();
     const { openSuccessNotification, openErrorNotification } = useNotification();
     const [ statusFirstName, setStatusFirstName ] = useState(false);
     const [ statusLastName, setStatusLastName ] = useState(false);
@@ -35,6 +37,37 @@ export default function Perona() {
     const [ statusPasswordRepeat, setStatusPasswordRepeat ] = useState(false);
     const [ checkTerms, setCheckTerms ] = useState(false);
     const [ checktPrivacy, setCheckPrivacy ] = useState(false);
+    const [ loadingSend, setLoadingSend] = useState(false);
+    const { token, lang } = useSelector((state) => state.userSlice);
+
+    const validateRulesNewPassword = [
+        {
+          required: true,
+          message: t('registro.message.error_field')
+        },
+        {
+          min: 8,
+          max: 20,
+          message: t('registro.message.error_min_max_character')
+        },
+        {
+          pattern: /^(?=.*[A-Z]).*$/,
+          message: t('registro.message.password_required_uppercase')
+        },
+        {
+          pattern: /^(?=.*[a-z]).*$/,
+          message: t('registro.message.password_required_lowercase')
+        },
+        {
+          pattern: /^(?=.*[0-9]).*$/,
+          message: t('registro.message.password_required_num')
+        },
+        {
+          // eslint-disable-next-line prefer-regex-literals
+          pattern: new RegExp('^(?=.*[~”`\\[\\]\\{\\}\\^"\\\\/\'()+,.:;<=>@$!¡%#?¿&_-]).*$'),
+          message: t('registro.message.password_required_character_special')
+        },
+      ];
 
     const { data: catalogLadaPhone = [] } = useQuery(
         [REACT_QUERY_KEYS.catalog.lada_phone.getAll("register")],
@@ -52,7 +85,7 @@ export default function Perona() {
         }
     )
 
-    const { mutate: saveUser, isLoading } = useMutation(
+    const { mutate: saveUser} = useMutation(
         {
             mutationFn: async (data) => {
                 const response = await apiUser.save(data)
@@ -60,11 +93,35 @@ export default function Perona() {
             },
             onSuccess: (data) => {
                 if(data.error) openErrorNotification(t('registro.message.error_same_user'));
-                else openSuccessNotification(t('registro.message.success_create_user'));
+                else onSuccessSaveuser(data);
+                setLoadingSend(false);
             },
-            onError: (error) => openErrorNotification(t('general_message.error_sistem'))
+            onError: (error) => {
+                openErrorNotification(t('general_message.error_sistem'))
+                setLoadingSend(false);
+            }
         }
-    )
+    );
+
+    function onSuccessSaveuser(data) {
+        // console.log("🚀 ~ onSuccessSaveuser ~ data:", data)
+        openSuccessNotification(t('registro.message.success_create_user'))
+        window.localStorage.setItem('tokenSession', data?.items?.token);
+        window.localStorage.setItem('idProfile', data?.items?.idProfile);
+        // dispatch(setToken(data?.items?.token));
+        redirectPanels(data?.items?.idProfile);
+    }
+
+    function redirectPanels (idProfile){
+        switch (idProfile) {
+            case 1:
+                router.push("/panel-client");
+                break;
+            case 2: 
+                router.push("/")
+                break;
+        }
+    }
 
     useEffect(() => {
         form.setFieldValue(
@@ -96,7 +153,7 @@ export default function Perona() {
                 alert('acepter terminos y condiciones y aviso de privacidad')
                 return
             }
-
+            setLoadingSend(true);
             saveUser({
                 firstName: form.getFieldValue("firstName").trim(),
                 lastName: form.getFieldValue("lastName").trim(),
@@ -108,15 +165,15 @@ export default function Perona() {
                 idProfile: form.getFieldValue("typeUser")
             });
         } catch(error) {
-            console.log(error)
+            // console.log(error)
         }
     }
 
     return(
-        <div className={styles.main}>
+        <div style={{ display: 'flex', justifyContent: 'center'}}>
             <div className='mt-3 col-7 col-md-7'>
                 <Form 
-                    className='card-register p-3'
+                    className='card-register py-3 px-5'
                     form={form}
                 >
                     <h5 className='text-center' style={{marginBottom: '25px', marginTop: '15px'}}>{t('registro.title')}</h5>
@@ -136,7 +193,6 @@ export default function Perona() {
                             >
                                 <Input 
                                     className={statusFirstName ? "form-input-success" : "form-input"} 
-                                    // suffix={statusFirstName ? <CheckOutlined className='check-success-green'/> : ""}
                                     onBlur={e => handleInput(setStatusFirstName, "firstName")}
                                     placeholder={t('registro.placeholder.first_name')}
                                 />
@@ -156,7 +212,6 @@ export default function Perona() {
                             >
                                 <Input 
                                     className={statusLastName ? "form-input-success" : "form-input"} 
-                                    // suffix={statusLastName ? <CheckOutlined className='check-success-green'/> : ""}
                                     onBlur={e => handleInput(setStatusLastName, "lastName")} 
                                     placeholder={t('registro.placeholder.last_name')} />
                             </Form.Item>
@@ -181,7 +236,6 @@ export default function Perona() {
                             >
                                 <Input 
                                     className={statusEmail ? "form-input-success" : "form-input"} 
-                                    // suffix={statusEmail ? <CheckOutlined className='check-success-green'/> : ""}
                                     onBlur={e => handleInput(setStatusEmail, "email")}
                                     placeholder={t('registro.placeholder.email')}
                                 />
@@ -203,7 +257,6 @@ export default function Perona() {
                             >
                                 <DatePicker
                                     className={statusBirthDate ? "form-input-success" : "form-input"} 
-                                    // suffix={statusBirthDate ? <CheckOutlined className='check-success-green'/> : ""}
                                     onBlur={e => handleInput(setStatusBirthDate, "birthDate")}
                                     placeholder={t('registro.placeholder.birth_date')} 
                                 />
@@ -245,7 +298,6 @@ export default function Perona() {
                                         
                                         <Input 
                                             className={statusPhone ? "form-input-success" : "form-input"} 
-                                            // suffix={statusPhone ? <CheckOutlined className='check-success-green'/> : ""}
                                             onBlur={e => handleInput(setStatusPhone, "phone")}
                                             placeholder={t('registro.placeholder.phone')}
                                         />
@@ -258,22 +310,14 @@ export default function Perona() {
                         <Col span={11}>
                             <Form.Item
                                 name="password"
-                                label={customLabel(t('registro.password'))}
-                                rules={[
-                                    {
-                                        message: t('registro.message.error_password'),
-                                        pattern: REGEX_CATALOG.PASSWORD
-                                    },
-                                    {
-                                        message: t('registro.message.error_field'),
-                                        required: true
-                                    }
-                                ]}
+                                label={t('registro.password')}
+                                rules={validateRulesNewPassword}
                                 hasFeedback
                             >
                                 <Input.Password 
+                                    minLength={8}
+                                    maxLength={20}
                                     className={statusPassword ? "form-input-success" : "form-input"} 
-                                    // suffix={statusPassword ? <CheckOutlined className='check-success-green'/> : ""}
                                     onBlur={e => handleInput(setStatusPassword, "password")}
                                     placeholder={t('registro.placeholder.password')}
                                 />
@@ -281,17 +325,10 @@ export default function Perona() {
                         </Col>
                         <Col span={11}>
                             <Form.Item
-                                label={customLabel(t('registro.password_repeat'))}
+                                label={t('registro.password_repeat')}
                                 name="passwordRepeat"
                                 rules={[
-                                    {
-                                        message: t('registro.message.error_password'),
-                                        pattern: REGEX_CATALOG.PASSWORD
-                                    },
-                                    {
-                                        message: t('registro.message.error_field'),
-                                        required: true
-                                    },
+                                    ...validateRulesNewPassword,
                                     ({ getFieldValue }) => ({
                                         validator(_, value){
                                             if(!value || getFieldValue('password') === value) {
@@ -305,7 +342,6 @@ export default function Perona() {
                             >
                                 <Input.Password 
                                     className={statusPasswordRepeat ? "form-input-success" : "form-input"} 
-                                    // suffix={statusPasswordRepeat ? <CheckOutlined className='check-success-green'/> : ""}
                                     onBlur={e => handleInput(setStatusPasswordRepeat, "passwordRepeat")}
                                     placeholder={t('registro.placeholder.password_repeat')}
                                 />
@@ -314,7 +350,7 @@ export default function Perona() {
                     </Row>
                     <Form.Item 
                         name="typeUser"
-                        label={customLabel(t('registro.type_user'))}
+                        label={t('registro.type_user')}
                         rules={[
                             {
                                 message: t('registro.message.error_field'),
@@ -353,7 +389,15 @@ export default function Perona() {
                             </Checkbox>
                         </Col>
                     </Row>
-                    <Button onClick={handleSubmit} className='btn-login' text={t('registro.create_user')} />
+                    <Button 
+                        onClick={handleSubmit} 
+                        className='btn-login' 
+                        text={
+                            loadingSend 
+                            ? <LoadingOutlined style={{fontSize: '1.5em', color: 'black'}} /> 
+                            : t('registro.create_user')
+                        } 
+                    />
                 </Form>
             </div>
         </div>

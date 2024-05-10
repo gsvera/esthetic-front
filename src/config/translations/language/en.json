@@ -1,48 +1,71 @@
 {
   "menu_web": {
     "home": "Home",
-    "request_service": "Request service",
-    "want_be_provider": "I want to be provider",
+    "request_service": "Request a service",
+    "want_be_provider": "Want to be a provider",
     "login": "Login"
   },
   "form_login": {
-    "login": "Inicio de sesión",
+    "login": "Login",
     "email": "Email",
-    "password": "Contraseña",
-    "forget_password": "¿Olvido su contraseña?",
-    "no_count": "¿No tiene una cuenta?",
-    "create": "Cree una"
+    "password": "Password",
+    "button_login": "Log in",
+    "forget_password": "Forgot your password?",
+    "no_count": "Don't have an account?",
+    "create": "Create one",
+    "error_login": "There was an error, please try again later",
+    "user_password_invalidate": "Incorrect username or password"
   },
   "registro": {
     "title": "Profile Registration",
-    "first_name": "First Name(s)",
-    "last_name": "Last Name(s)",
+    "first_name": "First name(s)",
+    "last_name": "Last name(s)",
     "email": "Email",
-    "birth_date": "Date of Birth",
+    "birth_date": "Birth date",
     "phone": "Phone",
     "password": "Password",
-    "password_repeat": "Repeat Password",
-    "type_user": "User Type",
-    "create_user": "Create User",
+    "password_repeat": "Repeat password",
+    "type_user": "User type",
+    "create_user": "Create user",
     "client": "Client",
     "provider": "Provider",
-    "terms_conditions": "Terms and Conditions",
-    "privacy_notification": "Privacy Notification",
+    "terms_conditions": "Terms and conditions",
+    "privacy_notification": "Privacy notice",
     "placeholder": {
       "first_name": "Enter your first name(s)",
       "last_name": "Enter your last name(s)",
       "email": "Enter an email",
-      "birth_date": "Enter your date of birth",
-      "phone": "Enter your phone number",
+      "birth_date": "Enter your birth date",
+      "phone": "Enter your phone",
       "password": "Enter a password",
       "password_repeat": "Enter your password again"
     },
     "message": {
-      "error_field": "This field is required",
+      "error_field": "Field is required",
       "error_email": "Enter a valid email",
-      "error_password": "Password must contain at least: 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character, and be at least 8 characters long",
-      "error_same_password": "The entered passwords do not match",
-      "error_phone": "Enter a valid phone number"
+      "error_min_max_character": "Must have a minimum of 8 characters and a maximum of 20",
+      "password_required_uppercase": "Requires at least one uppercase letter",
+      "password_required_lowercase": "Requires at least one lowercase letter",
+      "password_required_num": "Requires at least one number",
+      "password_required_character_special": "Requires at least one special character",
+      "error_same_password": "The entered password does not match",
+      "error_phone": "Enter a valid phone number",
+      "error_same_user": "A user with the same email or phone number already exists",
+      "success_create_user": "User created successfully"
     }
+  },
+  "general_message": {
+    "error_sistem": "There was an error, please try again later"
+  },
+  "reset_password": {
+    "title": "Reset Password",
+    "placholder_email": "Enter your email",
+    "button": "Send",
+    "success_send_email": "An email has been sent to your email address to reset your password",
+    "error_send": "Something happened, please try again later",
+    "message": "An attempt is being made to reset your password, please click on the link below, otherwise ignore it",
+    "button_save": "Save",
+    "success_save_password": "The password has been updated successfully",
+    "token_expired": "The password was not updated, the token has expired"
   }
 }

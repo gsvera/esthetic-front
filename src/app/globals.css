@@ -116,3 +116,10 @@ li{
 .font-bold {
   font-weight: bold ;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100vh;
+}

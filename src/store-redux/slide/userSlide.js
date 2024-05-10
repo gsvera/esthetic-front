@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     token: null,
-    lang: 'es'
+    lang: 'es',
+    dataUser: {}
 };
 
 export const userSlice = createSlice({
@@ -14,10 +15,13 @@ export const userSlice = createSlice({
         },
         setToken: (state, action) => {
             state.token = action.payload
+        },
+        setDataUser: (state, action) => {
+            state.dataUser = action.payload
         }
     }
 });
 
-export const { updateLang, setToken } = userSlice.actions;
+export const { updateLang, setToken, setDataUser } = userSlice.actions;
 
 export default userSlice.reducer;

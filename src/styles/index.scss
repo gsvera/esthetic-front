@@ -5,6 +5,8 @@
     --back-color-pink: #B43A6B; 
     --back-color-pink-rgb: 180, 58, 107;
     --back-color-bone: #F7F7F7;
+    --back-color-disabled: #BFBFBF;
+    --back-color-disabled-rgb: 191, 191, 191 ;
     
     --color-success: #00DA11;
     --color-success-rgb: 0, 218, 17;
@@ -32,7 +34,6 @@
 .btn-login, .btn-lang {
     position: relative;
     z-index: 1;
-    
     text-align: center;
     padding: 15px 25px;
     text-transform: capitalize;
@@ -42,7 +43,6 @@
     display: inline-block;
     border-radius: 0;
     border: none;
-    
     overflow: hidden;
 }
 .btn-login:hover::before, .btn-lang:hover::before {
