@@ -1,0 +1,11 @@
+.reset-password {
+    display: flex;
+    justify-content: center;
+    .card-password {
+        width: 450px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        padding: 30px !important
+    }
+}

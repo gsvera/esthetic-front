@@ -43,8 +43,12 @@
     "message": {
       "error_field": "Campo obligatorio",
       "error_email": "Ingrese un correo valido",
-      "error_password": "La contraseña debe tener por lo menos: 1 minuscula, 1 mayuscula, 1 numero, 1 caracter especial y minimo 8 caracteres",
-      "error_same_password": "El password ingresado no es el mismo",
+      "error_min_max_character": "Debe tener un mínimo de 8 letras y un máximo de 20",
+      "password_required_uppercase": "Requiere al menos una mayuscula",
+      "password_required_lowercase": "Requiere al menosuna minuscula",
+      "password_required_num": "Requiere al menos un numero",
+      "password_required_character_special": "Requiere al menos un caracter especial",
+      "error_same_password": "La contraseña ingresado no es la misma",
       "error_phone": "Ingrese un numero telefonico valido",
       "error_same_user": "Ya existe un usuario con el mismo email o telefono",
       "success_create_user": "Se creo su usuario con éxito"
@@ -52,5 +56,16 @@
   },
   "general_message": {
     "error_sistem": "Hubo un error, por favor intentelo mas tarde"
+  },
+  "reset_password": {
+    "title": "Recuperar contraseña",
+    "placholder_email": "Ingrese su correo electronico",
+    "button": "Enviar",
+    "success_send_email": "Se envio un email a su correo electronico para restablecer su contraseña",
+    "error_send": "Algo ocurrio intentelo mas tarde",
+    "message": "Se esta intentando restablecer su contraseña por favor haga click en el link de abajo, de lo contrario haga caso omiso",
+    "button_save": "Guardar",
+    "success_save_password": "Se ha actualizado la contraseña correctamente",
+    "token_expired": "No se actualizo la contraseña, el token ha expirado"
   }
 }

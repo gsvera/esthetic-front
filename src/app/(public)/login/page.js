@@ -1,6 +1,6 @@
 'use client'
-import styles from "../page.module.css";
-import Button from '../../components/Button';
+import styles from "../../page.module.css";
+import Button from '@/components/Button';
 import apiUser from "@/api/services/apiUser";
 import { useMutation } from 'react-query';
 import './index.scss'
@@ -11,6 +11,7 @@ import { useNotification } from "@/hooks/useNotification";
 import { LoadingOutlined } from '@ant-design/icons';
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
+import { setToken } from "@/store-redux/slide/userSlide";
 
 const { useForm } = Form;
 
@@ -42,14 +43,19 @@ export const Login = () => {
 
     useEffect(() => {
         console.log(window.localStorage.getItem('tokenSession'))
-        if(window.localStorage.getItem('tokenSession') !== null)
-            redirectPanels(window.localStorage.getItem('idProfile'));
+        if(window.localStorage.getItem('tokenSession') !== null) {
+            setLoaging(true);
+            redirectPanels(parseInt(window.localStorage.getItem('idProfile')));
+        }
     },[])
 
     function handleSuccessLogin(data) {
         window.localStorage.setItem('tokenSession', data?.token);
         window.localStorage.setItem('idProfile', data.idProfile);
-        redirectPanels(data.idProfile);
+        setToken(data?.token);
+        setTimeout(() => {
+            redirectPanels(data.idProfile);
+        }, 1000)
     }
 
     function redirectPanels (idProfile){
@@ -74,7 +80,7 @@ export const Login = () => {
     }
 
     return(
-        <div className={`${styles.main}`}>
+        <div>
             <Form form={form} className="col-11 mx-auto mt-5 content-form-login">
                 <Row className="row d-flex justify-content-center">
                     <div className="col-7">
@@ -119,12 +125,13 @@ export const Login = () => {
                                 <Button 
                                     className="btn-login mt-3 mb-3" 
                                     onClick={onLogin} 
+                                    disabled={loading}
                                     text={
-                                        loading ? <LoadingOutlined style={{fontSize: '1.5em'}} /> : t('form_login.button_login')
+                                        loading ? <LoadingOutlined style={{fontSize: '1.5em', color: 'black'}} /> : t('form_login.button_login')
                                     }
                                 />
                                 <div className="text-center">
-                                    <a href="#" className='font-link'>{t('form_login.forget_password')}</a>
+                                    <Link href="/reset-password" className='font-link'>{t('form_login.forget_password')}</Link>
                                 </div>
                                 <div className='text-center'>
                                     <span>{t('form_login.no_count')} </span><Link className='font-link' href="/register">{t('form_login.create')}</Link>
