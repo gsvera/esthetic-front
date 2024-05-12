@@ -6,7 +6,7 @@ import { useMutation } from 'react-query';
 import './index.scss'
 import { useTranslation } from 'react-i18next'
 import Link from "next/link";
-import { Form, Input, Row } from "antd";
+import { Col, Form, Input, Row } from "antd";
 import { useNotification } from "@/hooks/useNotification";
 import { LoadingOutlined } from '@ant-design/icons';
 import { useEffect, useState } from "react";
@@ -83,64 +83,64 @@ export const Login = () => {
         <div>
             <Form form={form} className="col-11 mx-auto mt-5 content-form-login">
                 <Row className="row d-flex justify-content-center">
-                    <div className="col-7">
+                    <Col span={24} sm={24} md={14}>
                         <div className="" style={{borderRadius: '1rem', background: 'transparent'}}>
-                            <Row>
-                                <div className="col-md-5 col-lg-5 bg-logo-back center-x-y row">
+                            <div className="d-flex">
+                                <Col span={10} sm={10} className="bg-logo-back center-x-y row content-td">
                                     <img src="/assets/logo-esthetic.webp" alt="login form" className="img-login"/>
-                                </div>
-                                <div className="col-md-7 col-lg-7 d-flex align-items-center body-content-login">
+                                </Col>
+                                <Col span={24} sm={10} md={14} lg={14} className="d-flex align-items-center body-content-login">
                                     <div className="card-body p-4 p-lg-5 text-black">
                                         <div className="d-flex justify-content-center mb-3 pb-1">
                                             <h5 className="font-bold mb-0">{t('form_login.login')}</h5>
+                                        </div>
+                                        <Form.Item
+                                            className="form-label"
+                                            style={{marginLeft: '0'}}
+                                            label={t('form_login.email')}
+                                            name="username"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: t('registro.message.error_field')
+                                                }
+                                            ]}
+                                        >
+                                            <Input className="form-input"/>
+                                        </Form.Item>
+                                        <Form.Item
+                                            className="form-label"
+                                            style={{marginLeft: '0'}}
+                                            label={t('form_login.password')}
+                                            name="password"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: t('registro.message.error_field')
+                                                }
+                                            ]}
+                                        >
+                                            <Input.Password className="form-input" />
+                                        </Form.Item>    
+                                        <Button 
+                                            className="btn-login mt-3 mb-3" 
+                                            onClick={onLogin} 
+                                            disabled={loading}
+                                            text={
+                                                loading ? <LoadingOutlined style={{fontSize: '1.5em', color: 'black'}} /> : t('form_login.button_login')
+                                            }
+                                        />
+                                        <div className="text-center">
+                                            <Link href="/reset-password" className='font-link'>{t('form_login.forget_password')}</Link>
+                                        </div>
+                                        <div className='text-center'>
+                                            <span>{t('form_login.no_count')} </span><Link className='font-link' href="/register">{t('form_login.create')}</Link>
+                                        </div>
                                     </div>
-                                <Form.Item
-                                    className="form-label"
-                                    style={{marginLeft: '0'}}
-                                    label={t('form_login.email')}
-                                    name="username"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: t('registro.message.error_field')
-                                        }
-                                    ]}
-                                >
-                                    <Input className="form-input"/>
-                                </Form.Item>
-                                <Form.Item
-                                    className="form-label"
-                                    style={{marginLeft: '0'}}
-                                    label={t('form_login.password')}
-                                    name="password"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: t('registro.message.error_field')
-                                        }
-                                    ]}
-                                >
-                                    <Input.Password className="form-input" />
-                                </Form.Item>    
-                                <Button 
-                                    className="btn-login mt-3 mb-3" 
-                                    onClick={onLogin} 
-                                    disabled={loading}
-                                    text={
-                                        loading ? <LoadingOutlined style={{fontSize: '1.5em', color: 'black'}} /> : t('form_login.button_login')
-                                    }
-                                />
-                                <div className="text-center">
-                                    <Link href="/reset-password" className='font-link'>{t('form_login.forget_password')}</Link>
-                                </div>
-                                <div className='text-center'>
-                                    <span>{t('form_login.no_count')} </span><Link className='font-link' href="/register">{t('form_login.create')}</Link>
-                                </div>
+                                </Col>
                             </div>
                         </div>
-                        </Row>
-                    </div>
-                    </div>
+                    </Col>
                 </Row>
             </Form>
         </div>

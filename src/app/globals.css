@@ -105,9 +105,6 @@ a {
     color-scheme: dark;
   }
 }
-li{
-  font-family: var(--font-mono);
-}
 
 .form-control, label, span, a {
   font-size: 0.8em;
