@@ -170,10 +170,10 @@ export default function Perona() {
     }
 
     return(
-        <div style={{ display: 'flex', justifyContent: 'center'}}>
-            <div className='mt-3 col-7 col-md-7'>
+        <Row style={{ display: 'flex', justifyContent: 'center'}}>
+            <Col span={22} md={18} lg={14} className='my-4'>
                 <Form 
-                    className='card-register py-3 px-5'
+                    className='card-register'
                     form={form}
                 >
                     <h5 className='text-center' style={{marginBottom: '25px', marginTop: '15px'}}>{t('registro.title')}</h5>
@@ -243,7 +243,7 @@ export default function Perona() {
                         </Col>
                     </Row>
                     <Row style={{justifyContent: 'space-between'}}>
-                        <Col span={11}>
+                        <Col span={24} md={11} lg={11}>
                             <Form.Item
                                 name="birthDate"
                                 label={t('registro.birth_date')}
@@ -262,7 +262,7 @@ export default function Perona() {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col span={11}>
+                        <Col span={24} md={11} lg={11}>
                             <Row>
                                 <Col span={7}>
                                     <Form.Item
@@ -307,7 +307,7 @@ export default function Perona() {
                         </Col>
                     </Row>
                     <Row style={{justifyContent: 'space-between'}}>
-                        <Col span={11}>
+                        <Col span={24} md={11} lg={11}>
                             <Form.Item
                                 name="password"
                                 label={t('registro.password')}
@@ -323,7 +323,7 @@ export default function Perona() {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col span={11}>
+                        <Col span={24} md={11} lg={11}>
                             <Form.Item
                                 label={t('registro.password_repeat')}
                                 name="passwordRepeat"
@@ -399,7 +399,7 @@ export default function Perona() {
                         } 
                     />
                 </Form>
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 }

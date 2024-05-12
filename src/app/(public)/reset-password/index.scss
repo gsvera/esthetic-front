@@ -1,6 +1,29 @@
 .reset-password {
     display: flex;
     justify-content: center;
+}
+@media only screen and (max-width:768px) {
+    .card-password {
+        width: 90%;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        padding: 30px !important;
+        .anticon{
+            font-size: 1em !important;
+        }
+    }
+    .ant-form-item .ant-form-item-feedback-icon-error{
+        font-size: .8em !important;
+    }
+    .ant-form-item .ant-form-item-feedback-icon {
+        font-size: .8em !important;
+    }
+}
+
+
+
+@media only screen and (min-width: 769px){
     .card-password {
         width: 450px;
         justify-content: center;

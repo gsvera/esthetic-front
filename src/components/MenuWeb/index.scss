@@ -3,12 +3,54 @@
     position: relative;
     width: 100%;
     z-index: 99;
+    @media only screen and (max-width: 768px) {
+        .content-mobile {
+            display: flex;
+        }
+        .options-menu{
+            display: none !important;
+        }
+        .flag-lang{
+            width: 35px;
+            height: 25px;
+        }
+        .ant-select-single{
+            height: 50px;
+        }
+    }
+    @media only screen and (min-width: 769px) and (max-width: 1024px) {
+        
+        .flag-lang{
+            width: 25px;
+            height: 15px;
+        }
+    }
+    @media only screen and (min-width: 1025px) {
+        .options-menu{
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+        .flag-lang{
+            width: 25px;
+            height: 15px;
+        }
+    }
     &.scrolled {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-      }
+    }
+    .menu-button-mobile {
+        background-color: transparent;
+        font-size: 1.5em;
+        cursor: pointer;
+        color: white;
+        border-radius: 5px;
+        border: 1px solid white;
+        padding: 8px;
+    }
     .text-menu {
         color: white;
         cursor: pointer;
@@ -18,12 +60,23 @@
             font-weight: bold;
         }
     }
+    .img-lang {
+        width: 15px;
+        height: 15px;
+    }
     .aling-text {
         display: flex;
         align-items: center;
+        justify-content: center;
+    }
+    .ant-select-selector{
+        background: transparent !important;
+    }
+    .ant-select-arrow{
+        color: white;
     }
     .btn-lang {
-        font-size: 0.8em;
+        font-size: 1em;
         cursor: pointer;
         padding: 5px;
         background-color: transparent;
@@ -31,6 +84,7 @@
         border-radius: 5px;
         color:white;
         width: 50px;
+        height: 30px;
         &:hover {
             background-color: var(--back-color-purple);
         }
@@ -69,4 +123,39 @@
     visibility: visible !important;
     opacity:1;
     top:15px;
+}
+
+@keyframes menuShow{
+    0%{transform:translateY(-40%); display: block !important;}
+    25%{transform:translateY(-30%); display: block !important;}
+    50%{transform:translateY(-20%); display: block !important;}
+    100%{transform:translateY(0%); display: block !important;}
+}
+
+.menu-mobile{
+    display: block !important;
+    animation: menuShow .2s;
+    background: var(--back-color-purple);
+    padding: 20px;
+    margin: 0;
+    -webkit-transition:all ease .4s;
+    -moz-transition:all ease .4s;
+    transition:all ease .4s;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    li {
+        list-style: none;
+        margin: 10px 0;
+        a{
+            text-decoration: none;
+            color: white;
+        }
+    }
+}
+.menu-none-mobile{
+    -webkit-transition:all ease .4s;
+    -moz-transition:all ease .4s;
+    transition:all ease .4s;
+    display: none;   
 }

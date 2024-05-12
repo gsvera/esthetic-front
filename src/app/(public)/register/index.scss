@@ -5,3 +5,17 @@
         border-radius: 1px;
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .card-register {
+        padding: 10px 20px;
+        .anticon{
+            font-size: 1.5em !important;
+        }
+    }
+}
+@media only screen and (min-width: 769px) {
+    .card-register{
+        padding: 30px 60px;
+    }
+}
