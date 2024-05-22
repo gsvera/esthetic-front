@@ -1,0 +1,24 @@
+.personal-information{
+    .btn-update{
+        background:var(--color-update);
+        width: 100px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+    .btn-update:active{
+        transform: scale(0.95);
+    }
+    .btn-update-disabled{
+        background: var(--back-color-disabled) !important;
+        width: 100px;
+        color: black;
+        font-weight: 600;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;       
+    }
+}

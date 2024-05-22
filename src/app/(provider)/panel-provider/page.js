@@ -8,9 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setToken, setDataUser } from '@/store-redux/slide/userSlide';
 import { useEffect, useMemo, useState } from 'react';
 
-const { Text } = Typography;
-
-export default function PanelClient (){
+export default function PanelProvider() {
     const dispatch = useDispatch();
     let tokenSession = null;
     const { token, lang, dataUser } = useSelector((state) => state.userSlice);
@@ -22,7 +20,7 @@ export default function PanelClient (){
     dispatch(setToken(tokenSession));
 
     if(!token) redirect("/login")
-
+        
     const { data: dataGetUser, isLoading: loadignDataUser } = useQuery(
         [REACT_QUERY_KEYS.user.getDataByToken(tokenSession)],
         () => apiUser.getDataUser(),
@@ -34,9 +32,9 @@ export default function PanelClient (){
 
     if(loadignDataUser) return <Spin />
 
-    return(
-        <Row>
-            <Text>Bienvenido {completeName}</Text>
-        </Row>
+    return (
+        <div>
+            Hola proveedor {completeName}
+        </div>
     )
 }

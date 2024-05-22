@@ -1,29 +1,30 @@
 'use client'
 
 import React, { useEffect, useMemo, useState } from 'react'
-import styles from "../../page.module.css";
-import { useParams, useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { Form, Input, DatePicker, Row, Col, Flex, Radio, Select, Checkbox } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import Button from '@/components/Button';
 import { REGEX_CATALOG } from '@/config/constans';
 import './index.scss'
-import { useQuery, useMutation } from 'react-query';
+import { useQuery, useQueryClient, useMutation } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { setToken } from '@/store-redux/slide/userSlide';
 import { REACT_QUERY_KEYS } from '@/config/react-query-keys';
 import { useNotification } from '@/hooks/useNotification';
 import apiCatalogLadaPhone from '@/api/services/apiCatalogLadaPhone';
 import apiCatalogProfile from '@/api/services/apiCatalogProfile';
+import apiCatalogPlan from '@/api/services/apiCatalogPlan';
 import apiUser from '@/api/services/apiUser';
 import i18next from 'i18next';
 import { useRouter } from 'next/navigation';
+import CardPlan from '@/components/CardPlan';
 
 const { useForm } = Form;
 
 export default function Perona() {
     const { t } = useTranslation();
+    const queryClient = useQueryClient();
     const [ form ] = useForm();
     const router = useRouter();
     const dispatch = useDispatch();
@@ -38,7 +39,10 @@ export default function Perona() {
     const [ checkTerms, setCheckTerms ] = useState(false);
     const [ checktPrivacy, setCheckPrivacy ] = useState(false);
     const [ loadingSend, setLoadingSend] = useState(false);
+    const [ profileWithPlan, setProfileWitPlan ] = useState(false);
+    const [ planSelect, setPlanSelect ] = useState(0);
     const { token, lang } = useSelector((state) => state.userSlice);
+    const langText = useMemo(() => i18next.language.charAt(0).toUpperCase() + i18next.language.slice(1),[i18next]);
 
     const validateRulesNewPassword = [
         {
@@ -85,6 +89,14 @@ export default function Perona() {
         }
     )
 
+    const { data: catalogPlan = [] } = useQuery(
+        [REACT_QUERY_KEYS.catalog.catalog_plan.getAllActive('active')],
+        () => apiCatalogPlan.getAll(),
+        {
+            select: (data) => data.items
+        }
+    )
+
     const { mutate: saveUser} = useMutation(
         {
             mutationFn: async (data) => {
@@ -104,11 +116,9 @@ export default function Perona() {
     );
 
     function onSuccessSaveuser(data) {
-        // console.log("🚀 ~ onSuccessSaveuser ~ data:", data)
         openSuccessNotification(t('registro.message.success_create_user'))
         window.localStorage.setItem('tokenSession', data?.items?.token);
         window.localStorage.setItem('idProfile', data?.items?.idProfile);
-        // dispatch(setToken(data?.items?.token));
         redirectPanels(data?.items?.idProfile);
     }
 
@@ -118,7 +128,7 @@ export default function Perona() {
                 router.push("/panel-client");
                 break;
             case 2: 
-                router.push("/")
+                router.push("/panel-provider")
                 break;
         }
     }
@@ -137,6 +147,11 @@ export default function Perona() {
         setState(event.target.checked);
     }
 
+    const handleSelectTypeUser = (item) => {
+        setProfileWitPlan(item.withPlan)
+        queryClient.invalidateQueries([REACT_QUERY_KEYS.catalog.catalog_plan.getAllActive('active')])
+    }
+
     const handleInput = async (changeState, field) => {
         try {
             if(await form.validateFields([field]))
@@ -149,11 +164,18 @@ export default function Perona() {
     const handleSubmit = async () => {
         try {
             await form.validateFields()
+
+            if(profileWithPlan && planSelect === 0) {
+                openErrorNotification(t('registro.message.required_plan'))
+                return
+            }
+
             if(!checkTerms || !checktPrivacy) {
-                alert('acepter terminos y condiciones y aviso de privacidad')
+                openErrorNotification(t('registro.message.required_term_privacy'))
                 return
             }
             setLoadingSend(true);
+
             saveUser({
                 firstName: form.getFieldValue("firstName").trim(),
                 lastName: form.getFieldValue("lastName").trim(),
@@ -162,7 +184,8 @@ export default function Perona() {
                 lada: form.getFieldValue("lada"),
                 phone: form.getFieldValue("phone").trim(),
                 password: form.getFieldValue("password"),
-                idProfile: form.getFieldValue("typeUser")
+                idProfile: form.getFieldValue("typeUser"),
+                planSelect: planSelect
             });
         } catch(error) {
             // console.log(error)
@@ -171,7 +194,7 @@ export default function Perona() {
 
     return(
         <Row style={{ display: 'flex', justifyContent: 'center'}}>
-            <Col span={22} md={18} lg={14} className='my-4'>
+            <Col span={22} md={22} lg={20} className='my-4'>
                 <Form 
                     className='card-register'
                     form={form}
@@ -362,15 +385,31 @@ export default function Perona() {
                             <Radio.Group>
                                 {catalogProfile?.map(item => 
                                     <Radio.Button 
-                                        key={item.id}
+                                        onClick={e => handleSelectTypeUser(item)}
+                                        key={item?.id}
                                         className='text-center' 
-                                        style={{width: '130px'}} value={item.id}>
-                                        {item[`profileName${i18next.language.charAt(0).toUpperCase() + i18next.language.slice(1)}`]}
+                                        style={{width: '130px'}} value={item?.id}>
+                                        {item[`profileName${langText}`]}
                                     </Radio.Button>
                                 )}
                             </Radio.Group>
                         </Flex>
                     </Form.Item>
+                    {profileWithPlan && 
+                        <Row style={{ padding: '30px 0', justifyContent: 'center'}}>
+                            {catalogPlan?.map(item => 
+                                <Col style={{ height: 'auto'}}>
+                                    <CardPlan 
+                                        key={item?.id} 
+                                        plan={item} 
+                                        lang={langText} 
+                                        onHandleSelect={setPlanSelect} 
+                                        planSelect={planSelect} 
+                                    />
+                                </Col>
+                            )}
+                        </Row>
+                    }
                     <Row className='mb-3'>
                         <Col span={24}>
                             <Checkbox 
@@ -389,9 +428,16 @@ export default function Perona() {
                             </Checkbox>
                         </Col>
                     </Row>
+
+
+                    EL BOTON DEDBE CAMBIAR CUANDO POR EL BOTON DE PAGO DE LA INTEGRACION DE COBRO
+
+
+
                     <Button 
                         onClick={handleSubmit} 
                         className='btn-login' 
+                        disabledClass="disabled-button"
                         text={
                             loadingSend 
                             ? <LoadingOutlined style={{fontSize: '1.5em', color: 'black'}} /> 

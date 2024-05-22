@@ -124,6 +124,7 @@ export const ResetNewPassword = () => {
                     </Form.Item>
                     <Button 
                         className="btn-login" 
+                        disabledClass="disabled-button"
                         onClick={handleSendChangePassaword} 
                         disabled={loadingSend}
                         text={

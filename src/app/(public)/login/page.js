@@ -45,7 +45,6 @@ export const Login = () => {
         console.log(window.localStorage.getItem('tokenSession'))
         if(window.localStorage.getItem('tokenSession') !== null) {
             setLoaging(true);
-            redirectPanels(parseInt(window.localStorage.getItem('idProfile')));
         }
     },[])
 
@@ -64,7 +63,7 @@ export const Login = () => {
                 router.push("/panel-client");
                 break;
             case 2: 
-                router.push("/")
+                router.push("/panel-provider")
                 break;
         }
     }
@@ -124,6 +123,7 @@ export const Login = () => {
                                         </Form.Item>    
                                         <Button 
                                             className="btn-login mt-3 mb-3" 
+                                            disabledClass="disabled-button"
                                             onClick={onLogin} 
                                             disabled={loading}
                                             text={

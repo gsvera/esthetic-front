@@ -1,12 +1,11 @@
 'use client'
 import Link from 'next/link'
-import './index.scss'
-import Button from '../Button';
 import i18n from '../../config/translations/i18n';
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react';
 import { MenuOutlined } from '@ant-design/icons';
 import { Col, Image, Row, Select } from 'antd';
+import './index.scss'
 
 export default function MenuWeb() {
     const { t } = useTranslation();

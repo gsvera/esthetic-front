@@ -5,6 +5,12 @@
     "want_be_provider": "Want to be a provider",
     "login": "Login"
   },
+  "menu_provider": {
+    "home": "Home",
+    "notification": "Notifications",
+    "settings": "Settings",
+    "logout": "Log out"
+  },
   "form_login": {
     "login": "Login",
     "email": "Email",
@@ -51,11 +57,14 @@
       "error_same_password": "The entered password does not match",
       "error_phone": "Enter a valid phone number",
       "error_same_user": "A user with the same email or phone number already exists",
-      "success_create_user": "User created successfully"
+      "success_create_user": "User created successfully",
+      "required_term_privacy": "Debe aceptar terminos y condiciones y aviso de privacidad",
+      "required_plan": "You must choose a plan"
     }
   },
   "general_message": {
-    "error_sistem": "There was an error, please try again later"
+    "error_sistem": "There was an error, please try again later",
+    "update": "The data was successfully updated"
   },
   "reset_password": {
     "title": "Reset Password",
@@ -67,5 +76,19 @@
     "button_save": "Save",
     "success_save_password": "The password has been updated successfully",
     "token_expired": "The password was not updated, the token has expired"
+  },
+  "provider": {
+    "settings": {
+      "modal_title": "Settings",
+      "button_update": "Update",
+      "tabs": {
+        "personal_information": {
+          "tab_title": "Personal Information"
+        },
+        "service_information": {
+          "tab_title": "Service"
+        }
+      }
+    }
   }
 }

@@ -5,6 +5,12 @@
     "want_be_provider": "Quiero ser proveedor",
     "login": "Inicio de sesión"
   },
+  "menu_provider": {
+    "home": "Inicio",
+    "notification": "Notificaciones",
+    "settings": "Configuración",
+    "logout": "Cerrar sesión"
+  },
   "form_login": {
     "login": "Inicio de sesión",
     "email": "Email",
@@ -51,11 +57,14 @@
       "error_same_password": "La contraseña ingresado no es la misma",
       "error_phone": "Ingrese un numero telefonico valido",
       "error_same_user": "Ya existe un usuario con el mismo email o telefono",
-      "success_create_user": "Se creo su usuario con éxito"
+      "success_create_user": "Se creo su usuario con éxito",
+      "required_term_privacy": "Debe aceptar terminos y condiciones y aviso de privacidad",
+      "required_plan": "Debe elejir un plan"
     }
   },
   "general_message": {
-    "error_sistem": "Hubo un error, por favor intentelo mas tarde"
+    "error_sistem": "Hubo un error, por favor intentelo mas tarde",
+    "update": "Se actualizo correctamente los datos"
   },
   "reset_password": {
     "title": "Recuperar contraseña",
@@ -67,5 +76,19 @@
     "button_save": "Guardar",
     "success_save_password": "Se ha actualizado la contraseña correctamente",
     "token_expired": "No se actualizo la contraseña, el token ha expirado"
+  },
+  "provider": {
+    "settings": {
+      "modal_title": "Configuración",
+      "button_update": "Actualizar",
+      "tabs": {
+        "personal_information": {
+          "tab_title": "Información personal"
+        },
+        "service_information": {
+          "tab_title": "Servicio"
+        }
+      }
+    }
   }
 }

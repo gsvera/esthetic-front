@@ -70,6 +70,7 @@ export const ResetPassword = () => {
                     </Form.Item>
                     <Button 
                         className='btn-login' 
+                        disabledClass="disabled-button"
                         onClick={handleSend} 
                         style={{padding: '10px 25px'}} 
                         text={loadingSend ? <LoadingOutlined style={{fontSize: '1.5em', color: 'black'}} /> : t('reset_password.button')}
