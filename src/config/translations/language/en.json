@@ -20,7 +20,11 @@
     "no_count": "Don't have an account?",
     "create": "Create one",
     "error_login": "There was an error, please try again later",
-    "user_password_invalidate": "Incorrect username or password"
+    "user_password_invalidate": "Incorrect username or password",
+    "logout": "Log out",
+    "accept": "Accept",
+    "cancel": "Cancel",
+    "text_logout": "Are you sure you want to log out?"
   },
   "registro": {
     "title": "Profile Registration",

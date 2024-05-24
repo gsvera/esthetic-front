@@ -13,7 +13,7 @@ export default function PanelProvider() {
     let tokenSession = null;
     const { token, lang, dataUser } = useSelector((state) => state.userSlice);
 
-    const completeName = useMemo(() => `${dataUser.firstName} ${dataUser.lastName}`,[dataUser])
+    const completeName = useMemo(() => `${dataUser?.firstName} ${dataUser?.lastName}`,[dataUser])
 
     tokenSession = localStorage.getItem("tokenSession");    
     

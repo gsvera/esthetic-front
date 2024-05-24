@@ -8,10 +8,13 @@ export default {
         return await axiosInstance.post(`${BASE_URL}/save`, data).then(response => response);
     },
     updatePersonalInformation: async function(data) {
-        return await axiosInstance.post(`${BASE_URL_AUTH}/update-personel-information`, data).then(response => response);
+        return await axiosInstance.put(`${BASE_URL_AUTH}/update-personel-information`, data).then(response => response);
     },
     login: async function(data) {
         return await axiosInstance.post(`${BASE_URL}/login`, data).then(response => response);
+    },
+    logout: async function() {
+        return await axiosInstance.post(`${BASE_URL_AUTH}/logout`).then(response => response);
     },
     getDataUser: async function() {
         return await axiosInstance.get(`${BASE_URL_AUTH}/get-data-user`).then(response => response);

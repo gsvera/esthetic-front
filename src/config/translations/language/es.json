@@ -20,7 +20,11 @@
     "no_count": "¿No tiene una cuenta?",
     "create": "Cree una",
     "error_login": "Hubo un error, por favor intentelo mas tarde",
-    "user_password_invalidate": "Usuario o contraseña incorrectos"
+    "user_password_invalidate": "Usuario o contraseña incorrectos",
+    "logout": "Cerrar sesión",
+    "accept": "Aceptar",
+    "cancel": "Cancelar",
+    "text_logout": "¿Estás seguro ded finaliza la sessión?"
   },
   "registro": {
     "title": "Registro de perfil",

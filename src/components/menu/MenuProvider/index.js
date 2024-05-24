@@ -7,12 +7,14 @@ import i18n from "@/config/translations/i18n";
 import Link from 'next/link';
 import './index.scss';
 import ConfigModalProvider from "@/components/provider/ConfigModalProvider";
+import ModalLogout from "@/components/shared/logout";
 
 export const MenuProvider = () => {
     const { t } = useTranslation();
     const [ lang, setLang ] = useState();
     const [ menuMobile, setMenuMobile ] = useState(false);
     const [ showSetting, setShowSetting ] = useState(false);
+    const [ showLogout, setShowLogout ] = useState(false);
 
     useEffect(() => {
         setLang(localStorage.getItem('lang'))
@@ -42,6 +44,9 @@ export const MenuProvider = () => {
         setShowSetting(true)
     }
 
+    const handleLogout = () => {
+        setShowLogout(true);
+    }
     return(
         <div>
             <Row className='menu-web-provider d-flex' id="menu-web-provider">
@@ -62,7 +67,7 @@ export const MenuProvider = () => {
                             <SettingOutlined onClick={handleSetting} className="icon-menu"/>
                         </Tooltip>
                         <Tooltip placement="top" title={t('menu_provider.logout')}>
-                            <LogoutOutlined className="icon-menu"/>
+                            <LogoutOutlined onClick={handleLogout} className="icon-menu"/>
                         </Tooltip>
                         <Select 
                             style={{border: 'none'}}
@@ -94,6 +99,7 @@ export const MenuProvider = () => {
                 </ul>               
             </div>
             <ConfigModalProvider open={showSetting} handleClose={setShowSetting}/>
+            <ModalLogout open={showLogout} handleClose={setShowLogout}/>
         </div>
     )
 }
